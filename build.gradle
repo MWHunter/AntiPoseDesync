@@ -1,9 +1,12 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
-group = 'org.grimac'
-version = '1.0-SNAPSHOT'
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 repositories {
     mavenCentral()
@@ -25,6 +28,15 @@ dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.14-R0.1-SNAPSHOT'
     implementation 'com.github.retrooper.packetevents:spigot:2.0-SNAPSHOT'
 }
+
+shadowJar {
+    minimize()
+    relocate 'io.github.retrooper.packetevents', 'ac.grim.grimac.shaded.io.github.retrooper.packetevents'
+    relocate 'com.github.retrooper.packetevents', 'ac.grim.grimac.shaded.com.github.retrooper.packetevents'
+}
+
+group = 'org.grimac'
+version = '1.0-SNAPSHOT'
 
 def targetJavaVersion = 8
 java {
