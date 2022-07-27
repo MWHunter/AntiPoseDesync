@@ -1,0 +1,4 @@
+name: AntiPoseDesync
+version: '${version}'
+main: org.grimac.antiposedesync.AntiPoseDesync
+api-version: 1.14
